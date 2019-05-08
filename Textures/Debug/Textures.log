@@ -1,3 +1,4 @@
-﻿  main.cpp
-d:\desenvolvimento\projetos\learnopengl\learnopengl\textures\shader.h(128): warning C4244: 'argumento': conversão de 'int' para 'GLfloat', possível perda de dados
-  Textures.vcxproj -> D:\Desenvolvimento\Projetos\LearnOpenGL\LearnOpenGL\Debug\Textures.exe
+﻿  glad.c
+  main.cpp
+d:\desenvolvimento\projetos\learnopengl\textures\shader.h(128): warning C4244: 'argumento': conversão de 'int' para 'GLfloat', possível perda de dados
+  Textures.vcxproj -> D:\Desenvolvimento\Projetos\LearnOpenGL\Debug\Textures.exe

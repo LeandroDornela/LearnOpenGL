@@ -1,0 +1,3 @@
+﻿  main.cpp
+d:\desenvolvimento\projetos\learnopengl\transformations\shader.h(128): warning C4244: 'argumento': conversão de 'int' para 'GLfloat', possível perda de dados
+  Transformations.vcxproj -> D:\Desenvolvimento\Projetos\LearnOpenGL\Debug\Transformations.exe
