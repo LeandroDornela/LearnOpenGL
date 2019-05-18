@@ -162,7 +162,7 @@ int main()
 		glUniform1i(glGetUniformLocation(shader.id, "texture1"), 0);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
-		glUniform1i(glGetUniformLocation(shader.id, "texture1"), 1);
+		glUniform1i(glGetUniformLocation(shader.id, "texture2"), 1);
 
 		// Determina qual vao usar.
 		glBindVertexArray(vao);

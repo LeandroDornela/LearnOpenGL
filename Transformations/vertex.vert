@@ -8,10 +8,15 @@ layout(location = 2) in vec2 tex;
 out vec4 vertexColor;
 // Coordenada de textura do presente vertice.
 out vec2 texCoord;
+// Matriz de tranformação
+uniform mat4 transform;
+
+
+uniform float pass;
 
 void main()
 {
-	gl_Position = vec4(pos, 1.0);
-	vertexColor = vec4(col, 1.0);
-	texCoord = tex;
+	gl_Position = transform * vec4(pos, 1.0f);
+	vertexColor = transform * vec4(col, 1.0f);
+	texCoord = vec2(tex.x, tex.y + pass);
 }

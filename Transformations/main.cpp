@@ -146,6 +146,27 @@ int main()
 	stbi_image_free(data2);
 
 
+	// ========================================= Transformação ===========================================
+
+	// Cria uma matriz idenidade.
+	glm::mat4 transfMatrix = glm::mat4(1.0f);
+	// Aplica as tranformações, lembrando q os comendos de tranfomação são empilhados logo serão executados
+	// na ordem inversa.
+	// Todas as tranformações serão unidas em uma matriz.
+	//transfMatrix = glm::rotate(transfMatrix, glm::radians(45.0f), glm::vec3(0.0, 0.0, 1.0));
+	//transfMatrix = glm::scale(transfMatrix, glm::vec3(0.5, 0.5, 0.5));
+	
+
+	shader.Use();
+
+	unsigned int transformLocation = glGetUniformLocation(shader.id, "transform");
+	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, glm::value_ptr(transfMatrix));
+
+	// Setando uniform para fazer movimento na textura
+	unsigned int passLocation = glGetUniformLocation(shader.id, "pass");
+	glUniform1f(passLocation, 0.0f);
+
+
 	// ======================= Render loop =============================
 
 	while (!glfwWindowShouldClose(window))
@@ -161,12 +182,22 @@ int main()
 
 		shader.Use();
 
+		glm::mat4 transfMatrix = glm::mat4(1.0f);
+		//transfMatrix = glm::translate(transfMatrix, glm::vec3(0.5f, -0.5f, 0.0f));
+		transfMatrix = glm::rotate(transfMatrix, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+		//transfMatrix = glm::scale(transfMatrix, glm::vec3(0.5, 0.5, 0.5));
+		// glm::value_ptr é para deixa a matriz no formato q o OpenLG "gosta".
+		glUniformMatrix4fv(transformLocation, 1, GL_FALSE, glm::value_ptr(transfMatrix));
+
+		// Atualizando a uniform para mover a textura(no caso mover a posição do vertice em relação a textura).
+		glUniform1f(passLocation, (float)glfwGetTime());
+
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glUniform1i(glGetUniformLocation(shader.id, "texture1"), 0);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
-		glUniform1i(glGetUniformLocation(shader.id, "texture1"), 1);
+		glUniform1i(glGetUniformLocation(shader.id, "texture2"), 1);
 
 		// Determina qual vao usar.
 		glBindVertexArray(vao);
